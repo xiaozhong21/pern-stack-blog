@@ -1,6 +1,7 @@
-export const getTasks = () => _get("/api/tasks");
+export const getPosts = () => _get("/api/posts");
 
-export const addTask = (name) => _post("/api/tasks", { name });
+// export const addTask = (name) => _post("/api/tasks", { name });
+export const addPost = (post) => _post("/api/posts", post);
 
 const _get = async (url) => (await fetch(url)).json();
 
