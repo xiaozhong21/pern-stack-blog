@@ -6,7 +6,8 @@ export const addPost = (post) => _post("/api/posts", post);
 
 export const getComments = (post_id) => _get(`/api/posts/${post_id}/comments`);
 
-export const addComment = (comment) => _post(`/api/posts/comments`, comment);
+export const addPostComment = (postId, comment) =>
+  _post(`/api/posts/${postId}/comments`, comment);
 
 const _get = async (url) => (await fetch(url)).json();
 
