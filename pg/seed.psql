@@ -21,6 +21,33 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.comments (
+    id integer NOT NULL,
+    content text NOT NULL,
+    author text DEFAULT 'Anonymous'::text,
+    post_id integer,
+    "time" date DEFAULT CURRENT_DATE
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.comments ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: posts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -51,21 +78,41 @@ ALTER TABLE public.posts ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.comments (id, content, author, post_id, "time") FROM stdin;
+1	Great article!	Tyler	1	2021-09-01
+2	Interesting insights.	Misha	1	2021-09-15
+3	Looking forward to more articles on this topic!	Vivi	2	2021-09-29
+4	Brainstorm: what factors affect individual risk aversion?	Xiao	3	2021-09-30
+\.
+
+
+--
 -- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.posts (id, title, blurb, body, author, date_created, likes, img) FROM stdin;
+1	Diversification	Diversifying your portfolio by investing in different industries mitigates your portfolio fluctuation in a volatile market.	You do not want to put all eggs in one basket, do you? **Diversifying** your portfolio by investing in different industries mitigates your portfolio fluctuation in a volatile market. \n\n## Diversification\n\nIn finance, diversification is the process of allocating capital in a way that **reduces the exposure** to any one particular asset or risk. A common path towards diversification is to reduce risk or volatility by investing in a variety of assets.	Xiao Zhong	2021-01-01	5	https://images.unsplash.com/photo-1605792657660-596af9009e82?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1102&q=80
 2	Market Sentiment	The GME stock hype in 2020 was a clear manifestation of investor sentiment driving trading activities.	We like to think that investors are rational and therefore would drive stock prices towards companys true value. However, the market can be easily influenced by investor sentiment and market momentum.\n\n## Market sentiment\n\nMarket sentiment refers to the overall **attitude** of investors toward a particular security or financial market.	Xiao Zhong	2021-09-29	0	https://images.unsplash.com/photo-1611967556157-d5c8830b5161?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=465&q=80
-1	Why Do We Filter Stocks by Industry?	Diversifying your portfolio by investing in different industries mitigates your portfolio fluctuation in a volatile market.	You do not want to put all eggs in one basket, do you? **Diversifying** your portfolio by investing in different industries mitigates your portfolio fluctuation in a volatile market. \n\n## Diversification\n\nIn finance, diversification is the process of allocating capital in a way that **reduces the exposure** to any one particular asset or risk. A common path towards diversification is to reduce risk or volatility by investing in a variety of assets.	Xiao Zhong	2021-01-01	5	https://images.unsplash.com/photo-1605792657660-596af9009e82?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1102&q=80
 3	Risk Aversion	Are you a risk-lover or risk-averse investor? How much do you know about your risk attitude?	Are you a risk-lover or risk-averse investor? How much do you know about your risk attitude?\n\n## Risk Aversion\n\nWhat Is Risk Averse? The term risk-averse **describes the investor who chooses the preservation of capital over the potential for a higher-than-average return**. In investing, risk equals price volatility. A volatile investment can make you rich or devour your savings.	Xiao Zhong	2021-09-30	0	https://images.unsplash.com/photo-1605870445919-838d190e8e1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1172&q=80
+4	Are We Headed for a Hyperinflation? 	The current stock market is highly volatile due to investors' concern about excessive inflation.	The current stock market is highly volatile due to investors' concern about excessive inflation. \n\n## Hyperinflation\n\nHyperinflation is out-of-control inflation, in which the price of goods and services rises at an annual rate of 1,000% or more.	Xiao Zhong	2021-09-30	0	https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80
 \.
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.comments_id_seq', 4, true);
 
 
 --
 -- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.posts_id_seq', 3, true);
+SELECT pg_catalog.setval('public.posts_id_seq', 4, true);
 
 
 --
@@ -74,6 +121,14 @@ SELECT pg_catalog.setval('public.posts_id_seq', 3, true);
 
 ALTER TABLE ONLY public.posts
     ADD CONSTRAINT pk_posts PRIMARY KEY (id);
+
+
+--
+-- Name: comments comments_posts_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_posts_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

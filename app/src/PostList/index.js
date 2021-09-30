@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { Link } from "react-router-dom";
 
-import "./styles.module.scss";
+import styles from "./styles.module.scss";
 
 const PostList = ({ posts }) => (
-  <section>
+  <section className={styles.postlist}>
     <ul>
       {posts.map((card) => (
         <Card {...card} key={card.id} />
@@ -18,13 +18,13 @@ const Card = ({ id, img, title, blurb, author, date_created, likes }) => (
   <>
     <li key={id}>
       <img src={img} alt={title} />
-      <h2>
+      <h3>
         <Link to={`/posts/${id}`} style={{ textDecoration: "none" }}>
           {title}
         </Link>
-      </h2>
-      <p>{blurb}</p>
-      <p>Written on {date_created}</p>
+      </h3>
+      <h4>{blurb}</h4>
+      <p>Written on {date_created.substring(0, 10)}</p>
     </li>
   </>
 );

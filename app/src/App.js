@@ -7,8 +7,7 @@ import PostAddForm from "./PostAddForm/index";
 import PostDetail from "./PostDetail/index";
 import PostList from "./PostList/index";
 import * as apiClient from "./apiClient";
-
-import "./global.module.scss";
+import styles from "./global.module.scss";
 
 const App = () => {
   const [posts, setPosts] = React.useState([]);
@@ -20,27 +19,27 @@ const App = () => {
     loadPosts();
   }, []);
 
-  const style = {
+  const linkStyle = {
     textDecoration: "none",
     color: "white",
   };
 
   return (
-    <>
+    <div className={styles.body}>
       <nav>
         <ul>
           <li>
-            <Link to="/" style={style}>
+            <Link to="/" style={linkStyle}>
               Home
             </Link>
           </li>
           <li>
-            <Link to="/posts" style={style}>
+            <Link to="/posts" style={linkStyle}>
               Posts
             </Link>
           </li>
           <li>
-            <Link to="/addPost" style={style}>
+            <Link to="/addPost" style={linkStyle}>
               Add Post
             </Link>
           </li>
@@ -56,7 +55,7 @@ const App = () => {
           <Route path="addPost" element={<PostAddForm {...{ addPost }} />} />
         </Routes>
       </main>
-    </>
+    </div>
   );
 };
 
