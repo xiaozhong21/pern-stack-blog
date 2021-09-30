@@ -1,8 +1,10 @@
 import * as React from "react";
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Outlet } from "react-router-dom";
 
+import Home from "./Home/index";
 import PostAddForm from "./PostAddForm/index";
+import PostDetail from "./PostDetail/index";
 import PostList from "./PostList/index";
 import * as apiClient from "./apiClient";
 
@@ -18,19 +20,46 @@ const App = () => {
     loadPosts();
   }, []);
 
+  const style = {
+    textDecoration: "none",
+    color: "white",
+  };
+
   return (
     <>
       <nav>
-        <Link to="/">Blog</Link> | <Link to="addPost">Add Post</Link>
+        <ul>
+          <li>
+            <Link to="/" style={style}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/posts" style={style}>
+              Posts
+            </Link>
+          </li>
+          <li>
+            <Link to="/addPost" style={style}>
+              Add Post
+            </Link>
+          </li>
+        </ul>
       </nav>
       <main>
         <Routes>
-          <Route path="//*" element={<PostList {...{ posts }} />} />
-          <Route path="/addPost" element={<PostAddForm {...{ addPost }} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="posts" element={<Posts />}>
+            <Route path="/posts" element={<PostList {...{ posts }} />} />
+            <Route path=":id" element={<PostDetail />} />
+          </Route>
+          <Route path="addPost" element={<PostAddForm {...{ addPost }} />} />
         </Routes>
       </main>
     </>
   );
 };
+
+const Posts = () => <Outlet />;
 
 export default App;

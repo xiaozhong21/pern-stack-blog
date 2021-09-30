@@ -1,5 +1,7 @@
 export const getPosts = () => _get("/api/posts");
 
+export const getPost = (id) => _get(`/api/posts/${id}`);
+
 // export const addTask = (name) => _post("/api/tasks", { name });
 export const addPost = (post) => _post("/api/posts", post);
 

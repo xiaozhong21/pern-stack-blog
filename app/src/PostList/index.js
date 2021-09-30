@@ -1,33 +1,30 @@
 import * as React from "react";
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import PostDetail from "../PostDetail/index";
+import "./styles.module.scss";
 
 const PostList = ({ posts }) => (
-  <>
+  <section>
     <ul>
       {posts.map((card) => (
-        <>
-          <Card {...card} key={card.id} />
-          <Routes key={card.id}>
-            <Route path="/posts/:id" element={<PostDetail {...card} />} />
-          </Routes>
-        </>
+        <Card {...card} key={card.id} />
       ))}
     </ul>
-  </>
+  </section>
 );
 
-const Card = ({ id, img, title, blurb, body, author, date_created, likes }) => (
+const Card = ({ id, img, title, blurb, author, date_created, likes }) => (
   <>
     <li key={id}>
       <img src={img} alt={title} />
-      <Link to="posts/:id">{title}</Link>
-      {blurb}
-      {author}
-      {date_created}
-      {likes}
+      <h2>
+        <Link to={`/posts/${id}`} style={{ textDecoration: "none" }}>
+          {title}
+        </Link>
+      </h2>
+      <p>{blurb}</p>
+      <p>Written on {date_created}</p>
     </li>
   </>
 );
