@@ -11,14 +11,22 @@
     margin-bottom: 15px;
   }
 
-  p {
+  .metadata p {
+    text-align: center;
+    font-size: smaller;
+  }
+
+  .postbody {
     max-width: 60%;
+  }
+
+  p {
     text-align: left;
   }
 
-  ul {
-    display: flex;
-    flex-direction: column;
+  h4 {
+    font-style: italic;
+    font-size: smaller;
   }
 }
 
@@ -34,7 +42,7 @@
   }
 
   ul {
-    border: 1px solid grey;
+    border: 1px dashed grey;
     border-radius: 5px;
     display: flex;
     flex-direction: column;

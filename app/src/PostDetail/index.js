@@ -60,14 +60,20 @@ const PostDetail = () => {
           <>
             <img src={post.img} alt={post.title} />
             <h1>{post.title}</h1>
-            <p>Author: {post.author}</p>
-            <p>Date written: {post.date_created.substring(0, 10)}</p>
-            <p>Likes: {post.likes}</p>
+            <div className={styles.metadata}>
+              <p>
+                Author: {post.author} | Written on:{" "}
+                {post.date_created.substring(0, 10)}
+              </p>
+              <p>Likes: {post.likes}</p>
+            </div>
             {hrLine}
-            <ReactMarkdown>{post.body}</ReactMarkdown>
+            <div className={styles.postbody}>
+              <ReactMarkdown>{post.body}</ReactMarkdown>
+            </div>
             {hrLine}
             <h4>
-              Thanks for reading! Your feedback is highly appreciated{" "}
+              - Thanks for reading! Your feedback is highly appreciated -{" "}
               <span role="img" aria-label="heart emoji">
                 ❤️
               </span>
