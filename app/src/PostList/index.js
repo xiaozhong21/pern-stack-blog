@@ -2,17 +2,29 @@ import * as React from "react";
 
 import { Link } from "react-router-dom";
 
+import * as apiClient from "../apiClient";
+
 import styles from "./styles.module.scss";
 
-const PostList = ({ posts }) => (
-  <section className={styles.postlist}>
-    <ul>
-      {posts.map((card) => (
-        <Card {...card} key={card.id} />
-      ))}
-    </ul>
-  </section>
-);
+const PostList = () => {
+  const [posts, setPosts] = React.useState([]);
+
+  const loadPosts = async () => setPosts(await apiClient.getPosts());
+
+  React.useEffect(() => {
+    loadPosts();
+  }, []);
+
+  return (
+    <section className={styles.postlist}>
+      <ul>
+        {posts.map((card) => (
+          <Card {...card} key={card.id} />
+        ))}
+      </ul>
+    </section>
+  );
+};
 
 const Card = ({ id, img, title, blurb, author, date_created, likes }) => (
   <>
