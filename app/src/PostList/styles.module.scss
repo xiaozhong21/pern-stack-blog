@@ -1,13 +1,13 @@
 .postlist {
   max-width: 70%;
   margin: auto;
-  
+
   ul {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     margin: 20px auto;
-  
+
     li {
       min-width: 200px;
       display: flex;
@@ -30,7 +30,7 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
       }
-    
+
       img {
         margin: 0;
         border-radius: 10px;
@@ -38,7 +38,7 @@
         height: 12vw;
         object-fit: cover;
       }
-    
+
       p {
         color: rgb(150, 148, 148);
         max-width: 70%;
