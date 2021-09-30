@@ -41,11 +41,11 @@ const App = () => {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="posts" element={<Posts />}>
-            <Route path="/posts" element={<PostList {...{ posts }} />} />
+          <Route path="/posts" element={<Posts />}>
+            <Route path="" element={<PostList {...{ posts }} />} />
             <Route path=":id" element={<PostDetail />} />
           </Route>
-          <Route path="addPost" element={<PostAddForm {...{ addPost }} />} />
+          <Route path="/addPost" element={<PostAddForm {...{ addPost }} />} />
         </Routes>
       </main>
     </>
