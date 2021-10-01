@@ -1,16 +1,16 @@
 article {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   header {
     text-align: center;
-    
+
     img {
       max-width: 30%;
       max-height: 10%;
       box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
-      border-radius: 20%;
       margin-bottom: 15px;
     }
 
@@ -18,7 +18,7 @@ article {
       text-align: center;
       font-size: smaller;
     }
-  } 
+  }
 
   .postbody {
     max-width: 60%;
@@ -26,7 +26,7 @@ article {
     h2 {
       text-align: center;
     }
-    
+
     p {
       text-align: left;
     }
@@ -91,6 +91,3 @@ article {
     }
   }
 }
-
-
-

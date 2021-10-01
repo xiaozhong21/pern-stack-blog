@@ -7,11 +7,11 @@ import "./styles.module.scss";
 const PostAddForm = () => {
   const navigate = useNavigate();
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     const form = event.currentTarget;
     const post = Object.fromEntries(new FormData(form).entries());
     event.preventDefault();
-    apiClient.addPost(post);
+    await apiClient.addPost(post);
     navigate("/posts");
   };
 

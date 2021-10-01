@@ -28,14 +28,12 @@ const PostList = () => {
 
 const Card = ({ id, img, title, blurb, date_created }) => (
   <li key={id}>
-    <img src={img} alt={title} />
-    <h2>
-      <Link to={`/posts/${id}`} style={{ textDecoration: "none" }}>
-        {title}
-      </Link>
-    </h2>
-    <p className={styles.blurb}>{blurb}</p>
-    <p className={styles.date}>Written on {date_created.substring(0, 10)}</p>
+    <Link to={`/posts/${id}`}>
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <p className={styles.blurb}>{blurb}</p>
+      <p className={styles.date}>Published: {date_created.substring(0, 10)}</p>
+    </Link>
   </li>
 );
 
