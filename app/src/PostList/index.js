@@ -26,19 +26,17 @@ const PostList = () => {
   );
 };
 
-const Card = ({ id, img, title, blurb, author, date_created, likes }) => (
-  <>
-    <li key={id}>
-      <img src={img} alt={title} />
-      <h3>
-        <Link to={`/posts/${id}`} style={{ textDecoration: "none" }}>
-          {title}
-        </Link>
-      </h3>
-      <h4>{blurb}</h4>
-      <p>Written on {date_created.substring(0, 10)}</p>
-    </li>
-  </>
+const Card = ({ id, img, title, blurb, date_created }) => (
+  <li key={id}>
+    <img src={img} alt={title} />
+    <h2>
+      <Link to={`/posts/${id}`} style={{ textDecoration: "none" }}>
+        {title}
+      </Link>
+    </h2>
+    <p className={styles.blurb}>{blurb}</p>
+    <p className={styles.date}>Written on {date_created.substring(0, 10)}</p>
+  </li>
 );
 
 export default PostList;

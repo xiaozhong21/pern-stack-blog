@@ -1,9 +1,35 @@
 form {
+  text-align: center;
   margin-top: 30px;
 
-  button:hover {
-    cursor: pointer;
+  label {
+    display: block;
+
+    &:before {
+      content: "\a";
+      white-space: pre;
+    }
+
+    &:after {
+      content: "\a";
+      white-space: pre;
+    }
   }
+
+  button {
+    display: block;
+    margin: 10px auto;
+
+    button:hover {    
+      cursor: pointer; 
+    }
+
+    &:before {
+      content: "";
+      white-space: pre;
+    }
+  }
+ 
   span {
     color: red;
   }

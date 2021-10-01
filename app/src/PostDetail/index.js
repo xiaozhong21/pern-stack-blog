@@ -35,48 +35,36 @@ const PostDetail = () => {
     form.reset();
   };
 
-  const hrLine = (
-    <hr
-      style={{
-        color: "grey",
-        backgroundColor: "grey",
-        height: 0.5,
-        borderColor: "grey",
-        width: "60%",
-      }}
-    />
-  );
-
   return (
-    <section>
-      <div className={styles.postdetail}>
+    <>
+      <article>
         {post && (
           <>
-            <img src={post.img} alt={post.title} />
-            <h1>{post.title}</h1>
-            <div className={styles.metadata}>
+            <header>
+              <img src={post.img} alt={post.title} />
+              <h1>{post.title}</h1>
               <p>
                 Author: {post.author} | Written on:{" "}
                 {post.date_created.substring(0, 10)}
               </p>
               <p>Likes: {post.likes}</p>
-            </div>
-            {hrLine}
-            <div className={styles.postbody}>
-              <ReactMarkdown>{post.body}</ReactMarkdown>
-            </div>
-            {hrLine}
-            <h4>
+            </header>
+            <hr className={styles.hr} />
+            <ReactMarkdown className={styles.postbody}>
+              {post.body}
+            </ReactMarkdown>
+            <hr className={styles.hr} />
+            <footer>
               - Thanks for reading! Your feedback is highly appreciated -{" "}
               <span role="img" aria-label="heart emoji">
                 ❤️
               </span>
-            </h4>
+            </footer>
           </>
         )}
-      </div>
-      <div className={styles.commentdetail}>
-        <p>Comments:</p>
+      </article>
+      <section className={styles.commentdetail}>
+        <h1>Comments:</h1>
         <ul>
           {comments &&
             comments.map(({ id, content, author, time }) => (
@@ -88,21 +76,15 @@ const PostDetail = () => {
               </li>
             ))}
         </ul>
-      </div>
-      <div className={styles.addcomment}>
         <form {...{ onSubmit }}>
-          <label>
-            Your comment:
-            <input name="content" required />
-          </label>
-          <label>
-            Name:
-            <input name="author" />
-          </label>
+          <label htmlFor="content">Your comment:</label>
+          <textarea id="content" name="content" required />
+          <label htmlFor="author">Name:</label>
+          <input id="author" name="author" />
           <button>Submit Comment</button>
         </form>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
