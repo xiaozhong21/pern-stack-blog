@@ -20,8 +20,10 @@ postRouter.use(express.json());
 postRouter.post("/", async (request, response) => {
   response.status(201).json(await db.addPost(request.body));
 });
-postRouter.post("/comments", async (request, response) => {
-  response.status(201).json(await db.addComment(request.body));
+postRouter.post("/:postId/comments", async (request, response) => {
+  response
+    .status(201)
+    .json(await db.addPostComment(request.params.postId, request.body));
 });
 
 export default postRouter;

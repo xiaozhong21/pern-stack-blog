@@ -6,10 +6,10 @@ const db = initDb();
 export const getPosts = () => db.any("SELECT * FROM posts");
 
 export const getPost = (id) =>
-  db.one(`SELECT * FROM posts WHERE id = ${id}`, { id });
+  db.one("SELECT * FROM posts WHERE id = $<id>", { id });
 
 export const getComments = (post_id) =>
-  db.any(`SELECT * FROM comments WHERE post_id = ${post_id}`, { post_id });
+  db.any("SELECT * FROM comments WHERE post_id = $<post_id>", { post_id });
 
 export const addPost = (post) =>
   db.one(
@@ -17,10 +17,10 @@ export const addPost = (post) =>
     post,
   );
 
-export const addComment = (comment) =>
+export const addPostComment = (postId, comment) =>
   db.one(
-    "INSERT INTO comments(content, author, post_id) VALUES($1, $2, $3) RETURNING *",
-    [comment.content, comment.author, comment.id],
+    "INSERT INTO comments(content, author, post_id) VALUES($<content>, $<author>, $<postId> ) RETURNING *",
+    { ...comment, postId },
   );
 
 function initDb() {

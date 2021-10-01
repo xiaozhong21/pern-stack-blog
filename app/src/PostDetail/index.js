@@ -22,22 +22,16 @@ const PostDetail = () => {
     [id],
   );
 
-  const addComment = (comment) =>
-    apiClient.addComment(comment).then(getComments);
-
   React.useEffect(() => {
     id !== undefined && getPost() && getComments();
   }, [id, getPost, getComments]);
 
   const onSubmit = (event) => {
     const form = event.currentTarget;
-    const {
-      content: { value: content },
-      author: { value: author },
-    } = form.elements;
+    const comment = Object.fromEntries(new FormData(form).entries());
 
     event.preventDefault();
-    addComment({ id, content, author });
+    apiClient.addPostComment(id, comment).then(getComments);
     form.reset();
   };
 

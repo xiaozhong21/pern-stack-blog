@@ -1,64 +1,41 @@
 import * as React from "react";
 
-import { Routes, Route, Link, Outlet } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 import Home from "./Home/index";
 import PostAddForm from "./PostAddForm/index";
 import PostDetail from "./PostDetail/index";
 import PostList from "./PostList/index";
-import * as apiClient from "./apiClient";
-import styles from "./global.module.scss";
 
-const App = () => {
-  const [posts, setPosts] = React.useState([]);
+import "./global.scss";
 
-  const loadPosts = async () => setPosts(await apiClient.getPosts());
-  const addPost = (post) => apiClient.addPost(post).then(loadPosts);
-
-  React.useEffect(() => {
-    loadPosts();
-  }, []);
-
-  const linkStyle = {
-    textDecoration: "none",
-    color: "white",
-  };
-
-  return (
-    <div className={styles.body}>
+const App = () => (
+  <>
+    <header>
       <nav>
         <ul>
           <li>
-            <Link to="/" style={linkStyle}>
-              Home
-            </Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/posts" style={linkStyle}>
-              Posts
-            </Link>
+            <Link to="/posts">Posts</Link>
           </li>
           <li>
-            <Link to="/addPost" style={linkStyle}>
-              Add Post
-            </Link>
+            <Link to="/addPost">Add Post</Link>
           </li>
         </ul>
       </nav>
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="posts" element={<Posts />}>
-            <Route path="/posts" element={<PostList {...{ posts }} />} />
-            <Route path=":id" element={<PostDetail />} />
-          </Route>
-          <Route path="addPost" element={<PostAddForm {...{ addPost }} />} />
-        </Routes>
-      </main>
-    </div>
-  );
-};
+    </header>
 
-const Posts = () => <Outlet />;
+    <main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/posts" element={<PostList />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
+        <Route path="/addPost" element={<PostAddForm />} />
+      </Routes>
+    </main>
+  </>
+);
 
 export default App;

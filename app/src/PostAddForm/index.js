@@ -1,8 +1,12 @@
-import * as React from "react";
+import { useNavigate } from "react-router-dom";
+
+import * as apiClient from "../apiClient";
 
 import "./styles.module.scss";
 
-const PostAddForm = ({ addPost }) => {
+const PostAddForm = () => {
+  const navigate = useNavigate();
+
   const onSubmit = (event) => {
     const form = event.currentTarget;
     const {
@@ -13,8 +17,8 @@ const PostAddForm = ({ addPost }) => {
     } = form.elements;
 
     event.preventDefault();
-    addPost({ title, blurb, author, body });
-    form.reset();
+    apiClient.addPost({ title, blurb, author, body });
+    navigate("/posts");
   };
 
   return (
