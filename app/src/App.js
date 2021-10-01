@@ -2,33 +2,39 @@ import * as React from "react";
 
 import { Routes, Route, Link } from "react-router-dom";
 
-import Tasks from "./Tasks";
+import Home from "./Home/index";
+import PostAddForm from "./PostAddForm/index";
+import PostDetail from "./PostDetail/index";
+import PostList from "./PostList/index";
+
+import "./global.scss";
 
 const App = () => (
   <>
-    <nav>
-      <Link to="/">Home</Link> | <Link to="dashboard">Dashboard</Link>
-    </nav>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/posts">Posts</Link>
+          </li>
+          <li>
+            <Link to="/addPost">Add Post</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
     <main>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/posts" element={<PostList />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
+        <Route path="/addPost" element={<PostAddForm />} />
       </Routes>
     </main>
-  </>
-);
-
-const Home = () => (
-  <>
-    <h1>{process.env.REACT_APP_TITLE}</h1>
-    <h2>{process.env.REACT_APP_SUBTITLE}</h2>
-    <Tasks />
-  </>
-);
-
-const Dashboard = () => (
-  <>
-    <h1>Dashboard</h1>
   </>
 );
 
