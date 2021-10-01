@@ -1,6 +1,8 @@
 .postlist {
   max-width: 70%;
-  margin: auto;
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
 
   ul {
     display: flex;
@@ -19,6 +21,10 @@
       align-items: center;
       max-width: 25%;
       padding: 0;
+
+      &:hover {
+        box-shadow: 0 0 10px #fff, -2px 0 10px #f0f, 2px 0 10px #0ff;
+      }
 
       a {
         text-decoration: none;

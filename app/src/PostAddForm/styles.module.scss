@@ -1,6 +1,6 @@
 form {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 70px;
 
   label {
     display: block;
@@ -20,8 +20,8 @@ form {
     display: block;
     margin: 10px auto;
 
-    button:hover {    
-      cursor: pointer; 
+    button:hover {
+      cursor: pointer;
     }
 
     &:before {
@@ -29,7 +29,7 @@ form {
       white-space: pre;
     }
   }
- 
+
   span {
     color: red;
   }
